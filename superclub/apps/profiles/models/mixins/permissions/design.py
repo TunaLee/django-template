@@ -1,0 +1,19 @@
+# Django
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+# Local
+from superclub.modules.choices import STAFF_TYPE_CHOICES
+
+
+class ProfileDesignPermissionMixin(models.Model):
+    # Design Manager Permission
+    club_design_permission = models.BooleanField(_('클럽 디자인 권한'), null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.club_design_permission = self.club.design_permission <= self.permission_grade
+
+        return super(ProfileDesignPermissionMixin, self).save(*args, **kwargs)
