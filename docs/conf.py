@@ -26,7 +26,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "superclub"
+project = "template"
 copyright = """2022, Leo Yunhyung Lee"""
 author = "Leo Yunhyung Lee"
 

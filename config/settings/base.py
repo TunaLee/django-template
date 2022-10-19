@@ -13,8 +13,8 @@ from typing import List
 from corsheaders.defaults import default_methods
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# superclub/
-APPS_DIR = ROOT_DIR / "superclub"
+# template/
+APPS_DIR = ROOT_DIR / "template"
 env = environ.Env()
 
 # ENVIRONMENT
@@ -159,24 +159,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "superclub.apps.views.apps.ViewsConfig",
-    "superclub.apps.clubs.apps.ClubsConfig",
-    "superclub.apps.comments.apps.CommentsConfig",
-    "superclub.apps.pins.apps.PinsConfig",
-    "superclub.apps.likes.apps.LikesConfig",
-    "superclub.apps.boards.apps.BoardsConfig",
-    "superclub.apps.posts.apps.PostsConfig",
-    "superclub.apps.shares.apps.SharesConfig",
-    "superclub.apps.tags.apps.TagsConfig",
-    "superclub.apps.users.apps.UsersConfig",
-    "superclub.apps.categories.apps.CategoriesConfig",
-    "superclub.apps.translations.apps.TranslationsConfig",
-    "superclub.apps.joins.apps.JoinsConfig",
-    "superclub.apps.club_tags.apps.ClubTagsConfig",
-    "superclub.apps.post_tags.apps.PostTagsConfig",
-    "superclub.apps.profiles.apps.ProfilesConfig",
-    "superclub.apps.club_counts.apps.ClubCountsConfig",
-    "superclub.apps.reports.apps.ReportsConfig",
+    "template.apps.app_templates.apps.ViewsConfig",
+    "template.apps.users.apps.UsersConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -184,7 +168,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "superclub.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "template.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -218,7 +202,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-    # {'NAME': 'superclub.utils.validators.CustomPasswordValidator'},
+    # {'NAME': 'template.utils.validators.CustomPasswordValidator'},
 ]
 
 # MIDDLEWARE
@@ -281,7 +265,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "superclub.utils.context_processors.settings_context",
+                "template.utils.context_processors.settings_context",
             ],
         },
     }
@@ -331,8 +315,7 @@ MANAGERS = ADMINS
 
 ADMIN_REORDER = (
     # Keep original label and models
-    'users', 'categories', 'clubs', 'socialaccount', 'authtoken', 'posts', 'comments', 'boards', 'tags', 'views',
-    'likes', 'joins', 'pins', 'translations', 'shares', 'profiles', 'reports'
+    'users', 'app_templates'
     # # Rename app
     # {'app': 'auth', 'label': 'Authorisation'},
     # # Reorder app models
@@ -383,13 +366,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "superclub.apps.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "template.apps.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "superclub.apps.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "template.apps.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "superclub.apps.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "template.apps.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "superclub.apps.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "template.apps.users.forms.UserSocialSignupForm"}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -400,7 +383,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
-    "EXCEPTION_HANDLER": "superclub.utils.exception_handlers.custom_exception_handler",
+    "EXCEPTION_HANDLER": "template.utils.exception_handlers.custom_exception_handler",
     "NON_FIELD_ERRORS_KEY": "non_field_errors",
 }
 
@@ -435,7 +418,7 @@ ADMIN_CHARTS_D3_JS_PATH = "bow/d3/d3.js"
 # ------------------------------------------------------------------------------------
 # https://drf-yasg.readthedocs.io/en/stable/settings.html
 SWAGGER_SETTINGS = {
-    "DEFAULT_AUTO_SCHEMA_CLASS": "superclub.utils.api.schema.CustomAutoSchema",
+    "DEFAULT_AUTO_SCHEMA_CLASS": "template.utils.api.schema.CustomAutoSchema",
     "SECURITY_DEFINITIONS": {
         "Token": {
             "type": "apiKey",

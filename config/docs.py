@@ -12,7 +12,7 @@ from drf_yasg.views import get_schema_view
 
 description = _(
     """
-슈퍼클럽 백엔드 서버 API 문서입니다.
+API 문서입니다.
 
 # Response Data
 <br/>
@@ -62,11 +62,11 @@ schema_url_patterns = [
 
 schema_view = get_schema_view(
     openapi.Info(
-        title=_("슈퍼클럽 API 문서"),
+        title=_("API 문서"),
         default_version="v1",
         description=description,
-        contact=openapi.Contact(email="leoyunhyung@gmail.com"),
-        license=openapi.License(name="Copyright 2022. Yunhyung Leo Lee. all rights reserved."),
+        contact=openapi.Contact(email=""),
+        license=openapi.License(name="Copyright 2022. Daniel Lee. all rights reserved."),
     ),
     public=public,
     permission_classes=permission_classes,
